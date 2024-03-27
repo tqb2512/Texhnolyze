@@ -1,9 +1,7 @@
 import CategoryContainer from "@/components/Container/Category";
 
-export default function CategoryPage() {
+export default function CategoryPage({ params }: { params: { category_id: string } }) {
     return (
-        <div>
-            <CategoryContainer/>
-        </div>
+        <CategoryContainer category_id={params.category_id}/>
     )
 }

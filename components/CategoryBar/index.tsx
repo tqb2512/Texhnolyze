@@ -1,22 +1,9 @@
 "use client";
 import * as Icons from "./Icons";
 import {useState} from "react";
-
-const categories = [
-    'Category 1',
-    'Category 2',
-    'Category 3',
-    'Category 4',
-    'Category 5',
-    'Category 6',
-    'Category 7',
-    'Category 8',
-    'Category 9',
-    'Category 10',
-    'Category 11',
-    'Category 12',
-]
-
+import * as categoriesAPI from "@/libs/features/apiSlices/categories";
+import {category} from "@prisma/client";
+import Link from "next/link";
 interface CategoryBarProps {
     isSticky?: boolean;
 }
@@ -25,10 +12,11 @@ export default function CategoryBar({isSticky}: CategoryBarProps){
 
     const [isOpen, setIsOpen] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
+    const { data: categories} = categoriesAPI.useGetCategoriesQuery();
+    const [selectedCategory, setSelectedCategory] = useState<category>({} as category);
 
     const nextSlide = () => {
-        if (currentSlide === categories.length - 5) {
-            setCurrentSlide(0);
+        if (currentSlide + 5 >= (categories?.length || 0)) {
             return;
         }
         setCurrentSlide(currentSlide + 1);
@@ -36,7 +24,6 @@ export default function CategoryBar({isSticky}: CategoryBarProps){
 
     const prevSlide = () => {
         if (currentSlide === 0) {
-            setCurrentSlide(categories.length - 5);
             return;
         }
         setCurrentSlide(currentSlide - 1);
@@ -63,17 +50,12 @@ export default function CategoryBar({isSticky}: CategoryBarProps){
 
                 <div className="flex w-full space-x-4 justify-between">
                     <div className="h-full flex space-x-4 overflow-x-hidden">
-                        {categories.slice(currentSlide, currentSlide + 4).map((category, index) => (
-                            <div key={index}
-                                 className="rounded-lg w-44 h-full flex space-x-4 p-4 items-center hover:bg-blue-light-bg">
+                        {categories?.slice(currentSlide, currentSlide + 5).map((category, index) => (
+                            <Link href={`/category/${category.id}`} key={index} className="rounded-lg w-44 h-full flex space-x-4 p-4 items-center hover:bg-blue-light-bg">
                                 <div className="w-10 h-10 bg-red-200"></div>
-                                <a className="font-semibold w-max">{category}</a>
-                            </div>
+                                <a className="font-semibold w-max">{category.name}</a>
+                            </Link>
                         ))}
-                        <div className="rounded-lg w-44 h-full flex space-x-4 p-4 items-center hover:bg-blue-light-bg">
-                            <div className="w-10 h-10 bg-red-200"></div>
-                            <a className="font-semibold w-max">{categories[currentSlide + 4]}</a>
-                        </div>
                     </div>
 
                     <div className="h-full flex space-x-4 items-center">
@@ -92,22 +74,24 @@ export default function CategoryBar({isSticky}: CategoryBarProps){
             {isOpen && (
                 <div
                     style={{top: window.scrollY > 80 ? 80 : 160 - window.scrollY}}
-                    className={`fixed left-0 right-0 bottom-0 flex justify-center pt-5 transition-opacity duration-200 ease-in-out ${isOpen ? 'opacity-100' : 'opacity-0'}`}>
+                    className={`fixed left-0 right-0 bottom-0 flex justify-center pt-5 transition-opacity duration-200 ease-in-out  ${isOpen ? 'opacity-100' : 'opacity-0'}`}>
                     <div className="bg-white w-[75%] h-[540px] rounded-lg p-4 flex space-x-4">
                         <ul className="min-w-[20%] h-full space-y-2 overflow-y-auto">
-                            {categories.map((category, index) => (
-                                <div key={index}
-                                     className="rounded-md hover:bg-blue-light-bg w-full h-12 pl-6 items-center">
+                            {categories?.map((category, index) => (
+                                <div
+                                    onClick={() => setSelectedCategory(category)}
+                                    key={index}
+                                    className="rounded-md hover:bg-blue-light-bg w-full h-12 pl-6 items-center">
                                     <div className="flex items-center space-x-4 h-full">
                                         <div className="w-6 h-6 bg-green-300"></div>
-                                        <a className="font-semibold">{category}</a>
+                                        <a className="font-semibold">{category.name}</a>
                                     </div>
                                 </div>
                             ))}
                         </ul>
 
                         <div className="bg-blue-light-bg h-full w-[55%] rounded-md">
-
+                            {selectedCategory.name}
                         </div>
 
                         <div className="flex h-full w-[25%] flex-col space-y-4">

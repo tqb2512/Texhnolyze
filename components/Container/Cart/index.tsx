@@ -23,7 +23,7 @@ export default function CartContainer() {
                     <CartItem/>
                 </div>
 
-                <div className="rounded-md bg-white h-max w-1/3 p-4">
+                <div className="rounded-md bg-white h-max w-1/3 p-4 sticky top-24 h-max">
                     <h1 className="font-semibold text-2xl">Summary</h1>
 
                     <hr className="mt-4"/>

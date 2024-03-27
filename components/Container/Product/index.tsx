@@ -13,7 +13,7 @@ export default function ProductContainer() {
                         </div>
                     </div>
 
-                    <div className="w-full h-max rounded-md bg-white p-4">
+                    <div className="w-full h-[1000px] rounded-md bg-white p-4">
 
                     </div>
                 </div>
