@@ -80,10 +80,14 @@ export default function CategoryContainer({ category_id }: CategoryContainerProp
 
             <div
                 className="mt-8 h-16 py-3 sticky top-0 bg-blue-light-bg flex space-x-2 z-10">
-                {/*Filters*/}
                 {filters.map((filter, index) => (
                     <button key={index} className="rounded-md bg-white h-full w-max  flex items-center">
-                        <a className="pl-2 pr-2" onClick={() => setActiveModal(filter.name)}>{filter.name}</a>
+                        <h1 className="pl-2 pr-2" onClick={() => {
+                            if (activeModal === filter.name)
+                                setActiveModal("");
+                            else
+                                setActiveModal(filter.name);
+                        }}>{filter.name}</h1>
                         {activeModal === filter.name && (
                             <div className="absolute bg-white rounded-md max-w-[300px] h-max shadow-lg p-4 top-16">
                                 {filter.value.map((value, i) => (
@@ -92,7 +96,7 @@ export default function CategoryContainer({ category_id }: CategoryContainerProp
                                             onChange={() => handleCheckbox(filter, value)}
                                             type="checkbox"
                                             className="mr-4"/>
-                                        <a className="truncate overflow-hidden">{value}</a>
+                                        <h1 className="truncate overflow-hidden">{value}</h1>
                                     </div>
                                 ))}
                             </div>
@@ -108,6 +112,25 @@ export default function CategoryContainer({ category_id }: CategoryContainerProp
                         {selectedProducts.map((product, index) => (
                             <ItemBox key={index} product={product} showDetail={true}/>
                         ))}
+                        {selectedProducts.map((product, index) => (
+                            <ItemBox key={index} product={product} showDetail={true}/>
+                        ))}
+                        {selectedProducts.map((product, index) => (
+                            <ItemBox key={index} product={product} showDetail={true}/>
+                        ))}
+                        {selectedProducts.map((product, index) => (
+                            <ItemBox key={index} product={product} showDetail={true}/>
+                        ))}
+                        {selectedProducts.map((product, index) => (
+                            <ItemBox key={index} product={product} showDetail={true}/>
+                        ))}
+                        {selectedProducts.map((product, index) => (
+                            <ItemBox key={index} product={product} showDetail={true}/>
+                        ))}
+                        {selectedProducts.map((product, index) => (
+                            <ItemBox key={index} product={product} showDetail={true}/>
+                        ))}
+
                     </div>
                 </div>
             </div>

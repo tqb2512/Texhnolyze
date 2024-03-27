@@ -5,8 +5,9 @@ export default function Header() {
     return (
         <header className="flex justify-center h-20 bg-white border-b border-gray-200">
             <div className="flex justify-between items-center w-full max-w-[75%]">
-                <a className="text-2xl font-bold">Texhnolyze</a>
-
+                <Link href="/" className="text-2xl font-bold">
+                    Texhnolyze
+                </Link>
                 <div className="space-x-4 flex">
                     <Link href="/cart" className="rounded-full bg-neutral-100 p-2">
                         <Icons.Cart className="w-5 h-5 text-black"/>

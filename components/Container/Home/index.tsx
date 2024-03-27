@@ -2,10 +2,12 @@
 import * as categoriesAPI from "@/libs/features/apiSlices/categories";
 import CategoryBox from "@/components/Container/Home/CategoryBox";
 import ItemBox from "@/components/Box/Item";
+import * as productsAPI from "@/libs/features/apiSlices/products";
 
 export default function HomeContainer() {
 
     const { data: categories } = categoriesAPI.useGetCategoriesQuery();
+    const { data: products } = productsAPI.useGetProductsQuery();
 
     return (
         <div className="mt-8 w-full max-w-[75%] mx-auto">
@@ -29,7 +31,9 @@ export default function HomeContainer() {
                     <h1 className="text-3xl font-semibold">Recommended</h1>
                     <div className="mt-4 w-full">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
-
+                            {products?.map((product, index) => (
+                                <ItemBox key={index} product={product} showDetail={true}/>
+                            ))}
                         </div>
                     </div>
                 </div>
