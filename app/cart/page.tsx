@@ -1,11 +1,10 @@
-import HomeContainer from "@/components/Container/Home";
 import CategoryBar from "@/components/CategoryBar";
-
-export default function Home() {
+import CartContainer from "@/components/Container/Cart";
+export default function CartPage() {
     return (
         <main className="w-full">
             <CategoryBar isSticky={true}/>
-            <HomeContainer/>
+            <CartContainer/>
         </main>
     );
 }

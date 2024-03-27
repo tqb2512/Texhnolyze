@@ -17,7 +17,11 @@ const categories = [
     'Category 12',
 ]
 
-export default function CategoryBar() {
+interface CategoryBarProps {
+    isSticky?: boolean;
+}
+
+export default function CategoryBar({isSticky}: CategoryBarProps){
 
     const [isOpen, setIsOpen] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -48,7 +52,7 @@ export default function CategoryBar() {
     }
 
     return (
-        <nav className="sticky top-0 flex justify-center h-20 bg-white pt-2 pb-2">
+        <nav className={`flex justify-center h-20 bg-white pt-2 pb-2 z-50 ${isSticky ? 'sticky top-0' : ''}`}>
             <div className="flex w-full max-w-[75%] space-x-4">
                 <div
                     onClick={handleModal}

@@ -7,7 +7,6 @@ export default function RootLayout({children,}: Readonly<{ children: React.React
         <html lang="en">
         <body className="w-screen overflow-x-hidden">
         <Header/>
-        <CategoryBar/>
         {children}
         </body>
         </html>
