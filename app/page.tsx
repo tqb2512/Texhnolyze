@@ -1,4 +1,3 @@
-import Image from "next/image";
 import HomeContainer from "@/components/Container/Home";
 
 export default function Home() {

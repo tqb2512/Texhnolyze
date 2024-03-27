@@ -73,7 +73,7 @@ export default function CategoryBar() {
                     </div>
 
                     <div className="h-full flex space-x-4 items-center">
-                        <div onClick={nextSlide} className="rounded-full p-2 bg-blue-light-bg">
+                        <div onClick={prevSlide} className="rounded-full p-2 bg-blue-light-bg">
                             <Icons.Prev className="w-5 h-5 text-black"/>
                         </div>
                         <div onClick={nextSlide} className="rounded-full p-2 bg-blue-light-bg">
