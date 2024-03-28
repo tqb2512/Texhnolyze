@@ -23,12 +23,12 @@ export default function CartContainer() {
 
                     <hr className="mt-4"/>
                     <div className="mt-2">
-                        <a className="font-semibold">Subtotal</a>
-                        <a className="float-right">N 2000</a>
+                        <span className="font-semibold">Subtotal</span>
+                        <h1 className="float-right text-lg text-red-500 font-semibold">{cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0).toLocaleString()}</h1>
                     </div>
-                    <div className="rounded-md bg-red-400 w-full h-12 flex items-center justify-center mt-4">
-                        <a>Place Order</a>
-                    </div>
+                    <button className="rounded-md bg-red-500 w-full h-12 flex items-center justify-center mt-4 text-white font-bold text-lg">
+                        Place Order
+                    </button>
                 </div>
             </div>
         </div>

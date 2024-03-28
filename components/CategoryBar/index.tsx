@@ -1,6 +1,6 @@
 "use client";
 import * as Icons from "./Icons";
-import {useState, useEffect, createRef} from "react";
+import {useState} from "react";
 import * as categoriesAPI from "@/libs/features/apiSlices/categories";
 import {category} from "@prisma/client";
 import Link from "next/link";
@@ -23,7 +23,7 @@ export default function CategoryBar({isSticky}: CategoryBarProps){
     }
 
     return (
-        <nav className={`flex justify-center h-20 bg-white pt-2 pb-2 z-50 ${isSticky ? 'sticky top-0' : ''}`}>
+        <nav className={`flex justify-center h-20 bg-white pt-2 pb-2 z-10 ${isSticky ? 'sticky top-0' : ''}`}>
             <div className="flex w-full max-w-[75%] space-x-4">
                 <div className="flex w-full space-x-4 justify-between">
                     <button
@@ -39,7 +39,7 @@ export default function CategoryBar({isSticky}: CategoryBarProps){
                             <Link href={`/category/${category.id}`} key={index}
                                   className="rounded-lg w-44 h-full flex space-x-4 p-4 items-center hover:bg-blue-light-bg">
                                 <div className="w-10 h-10 bg-red-200"></div>
-                                <a className="font-semibold w-max">{category.name}</a>
+                                <h1 className="font-semibold w-max">{category.name}</h1>
                             </Link>
                         ))}
                     </div>
