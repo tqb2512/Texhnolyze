@@ -1,21 +1,17 @@
 import "./globals.css";
-import Header from "@/components/Header";
-import CategoryBar from "@/components/CategoryBar";
 import StoreProvider from "@/libs/StoreProvider";
-import Footer from "@/components/Footer";
+import AuthProvider from "@/libs/AuthProvider";
 
-export default function RootLayout({children,}: Readonly<{ children: React.ReactNode; }>) {
+export default function RootLayout({children}: Readonly<{ children: React.ReactNode; }>) {
     return (
-
         <html lang="en">
         <body className="w-screen overflow-x-hidden">
         <StoreProvider>
-            <Header/>
-            {children}
-            <Footer/>
+            <AuthProvider session={null}>
+                {children}
+            </AuthProvider>
         </StoreProvider>
         </body>
         </html>
-
     );
 }

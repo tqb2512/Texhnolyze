@@ -3,6 +3,7 @@ import * as Icons from "./Icons";
 import {RootState} from "@/libs/store";
 import {useSelector} from "react-redux";
 import Link from "next/link";
+import {signOut} from "next-auth/react";
 
 export default function Header() {
     const cart = useSelector((state: RootState) => state.cart);
@@ -55,7 +56,8 @@ export default function Header() {
                         </div>
                     </div>
 
-                    <div className="rounded-full w-[36px] h-[36px] bg-neutral-100 p-2">
+                    <div onClick={() => {signOut()}}
+                         className="rounded-full w-[36px] h-[36px] bg-neutral-100 p-2">
                     </div>
                 </div>
             </div>
