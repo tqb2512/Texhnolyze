@@ -8,8 +8,8 @@ interface ItemBoxProps {
 export default function ItemBox({ product, showDetail }: ItemBoxProps) {
     return (
         <Link href={`/product/${product.id}`} className="min-h-[200px] min-w-[180px] rounded-md bg-white p-3">
-            <div className="min-h-[180px] bg-green-500 relative overflow-hidden">
-                {/*<Image src={product.image || "next.svg"} alt={"product image"} layout="fill" objectFit="cover"/>*/}
+            <div className="min-h-[180px] relative overflow-hidden">
+                <Image src={product.previewImage || "next.svg"} alt={"product image"} layout="fill" objectFit="cover"/>
             </div>
 
             <div>

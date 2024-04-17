@@ -1,6 +1,7 @@
 "use client";
 import CartItem from "@/components/Container/Cart/CartItem";
 import { RootState } from "@/libs/store";
+import Link from "next/link";
 import { useSelector } from "react-redux";
 
 export default function CartContainer() {
@@ -26,9 +27,11 @@ export default function CartContainer() {
                         <span className="font-semibold">Subtotal</span>
                         <h1 className="float-right text-lg text-red-500 font-semibold">{cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0).toLocaleString()}</h1>
                     </div>
-                    <button className="rounded-md bg-red-500 w-full h-12 flex items-center justify-center mt-4 text-white font-bold text-lg">
+                    <Link
+                        href="/checkout"
+                        className="rounded-md bg-red-500 w-full h-12 flex items-center justify-center mt-4 text-white font-bold text-lg">
                         Place Order
-                    </button>
+                    </Link>
                 </div>
             </div>
         </div>

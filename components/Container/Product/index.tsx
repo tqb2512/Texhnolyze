@@ -3,6 +3,7 @@ import * as cart from "@/libs/features/slices/cart";
 import * as productsAPI from "@/libs/features/apiSlices/products";
 import { useDispatch } from "react-redux";
 import { product } from "@prisma/client";
+import Image from "next/image";
 import {useEffect, useState} from "react";
 interface CategoryContainerProps {
     product_id: string;
@@ -12,6 +13,7 @@ export default function ProductContainer({ product_id }: CategoryContainerProps)
     const dispatch = useDispatch();
     const { data: product } = productsAPI.useGetProductQuery(product_id);
     const [alert, setAlert] = useState(false);
+    const [selectedIndex, setSelectedIndex] = useState(0);
 
     useEffect(() => {
         if (alert) {
@@ -25,18 +27,38 @@ export default function ProductContainer({ product_id }: CategoryContainerProps)
         <div className="mt-8 w-full max-w-[75%] mx-auto">
             <div className="flex w-full space-x-4 mt-4">
                 <div className="w-[65%] flex flex-col space-y-4">
-                    <div className="w-full h-max rounded-md bg-white flex justify-between space-x-2 p-4">
-                        <div className="flex flex-col w-32 space-y-2 items-center">
-                            <div className="w-full h-32 aspect-square bg-red-200 rounded-md"></div>
-                            <div className="w-full h-32 aspect-square bg-red-200 rounded-md"></div>
-                            <div className="w-full h-32 aspect-square bg-red-200 rounded-md"></div>
+                    <div className="w-full h-[44rem] aspect-square rounded-md bg-white flex justify-between space-x-2 p-4">
+                        <div className="w-[10rem] space-y-2 items-center h-full no-scrollbar overflow-y-scroll">
+                            <div className="flex flex-col space-y-2">
+                            {product?.images?.map((image, index) => (
+                                <div 
+                                    key={index} 
+                                    className={`size-[8rem] relative overflow-hidden rounded-md cursor-pointer border-2 ${selectedIndex === index ? " border-blue-500" : "border-blue-light-bg"}`}
+                                    onClick={() => {setSelectedIndex(index);}}>
+                                    <Image src={image || "next.svg"} alt={"product image"} fill sizes="128px" className="object-cover"/>
+                                </div>
+                            ))}
+                            </div>
                         </div>
-                        <div className="w-full h-full aspect-square rounded-md bg-red-400">
+                        <div className="w-full h-full aspect-square rounded-md border-blue-light-bg border-2 overflow-hidden relative">
+                            <Image src={product?.images?.[selectedIndex] || "next.svg"} alt={"product image"} fill sizes="664px" className="object-cover"/>
                         </div>
                     </div>
 
-                    <div className="w-full h-[1000px] rounded-md bg-white p-4">
-
+                    <div className="w-full h-max rounded-md bg-white p-4">
+                        <h1 className="font-semibold text-lg">Specification</h1>
+                        <hr className="mt-2"/>
+                        <div className="flex flex-col space-y-4 my-4">
+                            {product?.properties?.map((property, index) => (
+                                <div key={index} className="flex justify-between">
+                                    <h1>{property.name}</h1>
+                                    <h1>{property.value}</h1>
+                                </div>
+                            ))}
+                        </div>
+                        <h1 className="font-semibold text-lg mt-8">Description</h1>
+                        <hr className="mt-2"/>
+                        <p className="mt-2">{product?.description}</p>
                     </div>
                 </div>
 

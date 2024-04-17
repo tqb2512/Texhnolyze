@@ -34,7 +34,7 @@ export default function CategoryContainer({ category_id }: CategoryContainerProp
             });
             setFilters([...filters]);
         }
-    }, [products]);
+    }, [filters, products]);
 
     useEffect(() => {
         if (selectedFilters.length > 0) {

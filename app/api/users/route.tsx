@@ -1,0 +1,16 @@
+import { prisma } from "../base";
+import { NextResponse } from "next/server";
+
+export async function GET(req: Request) {
+
+    const urlParams = new URLSearchParams(req.url.split("?")[1]);
+    const user_id = urlParams.get("user_id") || "";
+
+    const user = await prisma.user.findUnique({
+        where: {
+            id: user_id ? user_id : undefined
+        }
+    })
+
+    return NextResponse.json(user);
+}

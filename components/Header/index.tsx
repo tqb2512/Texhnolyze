@@ -56,9 +56,12 @@ export default function Header() {
                         </div>
                     </div>
 
-                    <div onClick={() => {signOut()}}
-                         className="rounded-full w-[36px] h-[36px] bg-neutral-100 p-2">
-                    </div>
+                    <Link 
+                        href={"/user"}
+                        className="rounded-full w-[36px] h-[36px] bg-neutral-100 p-2">
+                        <Icons.User className="w-5 h-5 text-black"/>
+                    </Link>
+                    
                 </div>
             </div>
         </header>
