@@ -70,7 +70,7 @@ export default function CategoryBar({isSticky}: CategoryBarProps){
             {isOpen && (
                 <div
                     style={{top: window.scrollY > 80 ? 80 : 160 - window.scrollY}}
-                    className={`fixed left-0 right-0 bottom-0 flex justify-center pt-5 transition-opacity`}>
+                    className={`fixed z-50 left-0 right-0 bottom-0 flex justify-center pt-5 transition-opacity`}>
                     <div className="bg-white w-[75%] h-[540px] rounded-lg p-4 flex space-x-4 shadow-md ease-in-out duration-200 transform">
                         <div className="min-w-[20%] h-full space-y-2 overflow-y-auto">
                             {categories?.map((category, index) => (

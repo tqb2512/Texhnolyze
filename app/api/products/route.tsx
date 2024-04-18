@@ -6,6 +6,7 @@ export async function GET(req: Request) {
     const urlParams = new URLSearchParams(req.url.split("?")[1]);
     const product_id = urlParams.get("product_id") || "";
     const category_id = urlParams.get("category_id") || "";
+    const product_name = urlParams.get("product_name") || "";
     const page = urlParams.get("page") || "1";
     const limit = urlParams.get("limit") || "10";
     const offset = (parseInt(page) - 1) * parseInt(limit);
@@ -13,7 +14,11 @@ export async function GET(req: Request) {
     const products = await prisma.product.findMany({
         where: {
             id: product_id ? product_id : undefined,
-            category: category_id ? category_id : undefined
+            category: category_id ? category_id : undefined,
+            name: {
+                contains: product_name,
+                mode: "insensitive"
+            }
         },
         take: parseInt(limit),
         skip: offset

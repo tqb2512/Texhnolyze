@@ -34,7 +34,7 @@ export default function CategoryContainer({ category_id }: CategoryContainerProp
             });
             setFilters([...filters]);
         }
-    }, [filters, products]);
+    }, [products]);
 
     useEffect(() => {
         if (selectedFilters.length > 0) {
@@ -112,25 +112,6 @@ export default function CategoryContainer({ category_id }: CategoryContainerProp
                         {selectedProducts.map((product, index) => (
                             <ItemBox key={index} product={product} showDetail={true}/>
                         ))}
-                        {selectedProducts.map((product, index) => (
-                            <ItemBox key={index} product={product} showDetail={true}/>
-                        ))}
-                        {selectedProducts.map((product, index) => (
-                            <ItemBox key={index} product={product} showDetail={true}/>
-                        ))}
-                        {selectedProducts.map((product, index) => (
-                            <ItemBox key={index} product={product} showDetail={true}/>
-                        ))}
-                        {selectedProducts.map((product, index) => (
-                            <ItemBox key={index} product={product} showDetail={true}/>
-                        ))}
-                        {selectedProducts.map((product, index) => (
-                            <ItemBox key={index} product={product} showDetail={true}/>
-                        ))}
-                        {selectedProducts.map((product, index) => (
-                            <ItemBox key={index} product={product} showDetail={true}/>
-                        ))}
-
                     </div>
                 </div>
             </div>
