@@ -17,6 +17,11 @@ export default function Header() {
     const handleSearch = (searchValue: string) => {
         if (timerId) clearTimeout(timerId);
 
+        if (searchValue === "") {
+            setSearchResult([]);
+            return;
+        }
+
         setTimerId(setTimeout(async () => {
             const res = await fetch(`/api/products?product_name=${searchValue}`);
             const data = await res.json();
@@ -51,12 +56,12 @@ export default function Header() {
                 </div>
 
                 {searchResult.length > 0 && (
-                    <div className="w-[20rem] h-max-[20rem] overflow-y-auto shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white rounded-md absolute top-[4rem] ml-[8.5rem] z-50">
+                    <div className="w-[20rem] max-h-[26rem] overflow-y-auto shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white rounded-md absolute top-[4rem] ml-[8.5rem] z-50">
                         <div className="p-2 flex justify-between font-semibold">
                             <h1>Search Result</h1>
                         </div>
                         <hr />
-                        <div className="p-4 space-y-4 w-full h-max-[20rem] overflow-y-auto">
+                        <div className="p-4 space-y-4 w-full">
                             {searchResult.map((product, index) => (
                                 <div key={index} className="flex space-x-4">
                                     <div className="w-16 h-16 bg-red-200 rounded-md flex-shrink-0"></div>
