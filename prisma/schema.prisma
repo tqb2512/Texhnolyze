@@ -38,10 +38,9 @@ model brand {
 model category {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   description String
+  image       String
   mainProps   String[]
   name        String
-  /// Could not determine type: the field only had null or empty values in the sample set.
-  parentID    Json?
 }
 
 model inventory {

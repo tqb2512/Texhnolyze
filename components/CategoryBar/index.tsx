@@ -4,6 +4,7 @@ import {useState} from "react";
 import * as categoriesAPI from "@/libs/features/apiSlices/categories";
 import {category} from "@prisma/client";
 import Link from "next/link";
+import Image from "next/image";
 interface CategoryBarProps {
     isSticky?: boolean;
 }
@@ -38,7 +39,10 @@ export default function CategoryBar({isSticky}: CategoryBarProps){
                         {categories?.map((category, index) => (
                             <Link href={`/category/${category.id}`} key={index}
                                   className="rounded-lg w-44 h-full flex space-x-4 p-4 items-center hover:bg-blue-light-bg">
-                                <div className="w-10 h-10 bg-red-200"></div>
+                                <div className="w-10 h-10 bg-white relative overflow-hidden rounded-md">
+                                    <Image src={category.image || "next.svg"} alt={"category image"} fill sizes="40px"
+                                           className="object-cover" />
+                                </div>
                                 <h1 className="font-semibold w-max">{category.name}</h1>
                             </Link>
                         ))}
@@ -66,7 +70,6 @@ export default function CategoryBar({isSticky}: CategoryBarProps){
 
             </div>
 
-            {/*Modal*/}
             {isOpen && (
                 <div
                     style={{top: window.scrollY > 80 ? 80 : 160 - window.scrollY}}
@@ -79,7 +82,10 @@ export default function CategoryBar({isSticky}: CategoryBarProps){
                                     key={index}
                                     className="rounded-md hover:bg-blue-light-bg w-full h-12 pl-6 items-center hover:cursor-pointer">
                                     <div className="flex items-center space-x-4 h-full">
-                                        <div className="w-6 h-6 bg-green-300"></div>
+                                        <div className="w-8 h-8 bg-green-white rounded-md relative overflow-hidden">
+                                            <Image src={category.image || "next.svg"} alt={"category image"} fill sizes="32px"
+                                                   className="object-cover" />
+                                        </div>
                                         <h1 className="font-semibold">{category.name}</h1>
                                     </div>
                                 </div>
