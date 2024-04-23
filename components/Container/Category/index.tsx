@@ -73,13 +73,19 @@ export default function CategoryContainer({ category_id }: CategoryContainerProp
 
     return (
         <div className="mt-8 w-full max-w-[75%] mx-auto">
-            <div className="rounded-md h-[300px] w-full bg-green-100">
-
+            <div className="rounded-md h-max bg-white w-full p-4">
+                <h1 className="text-2xl font-semibold">
+                    {category?.name}
+                </h1>
+                <hr className="my-2"/>
+                <h1>
+                    {category?.description}
+                </h1>
             </div>
 
 
             <div
-                className="mt-8 h-16 py-3 sticky top-0 bg-blue-light-bg flex space-x-2 z-10">
+                className="mt-4 h-16 py-3 sticky top-0 bg-blue-light-bg flex space-x-2 z-10">
                 {filters.map((filter, index) => (
                     <button key={index} className="rounded-md bg-white h-full w-max  flex items-center">
                         <h1 className="pl-2 pr-2" onClick={() => {

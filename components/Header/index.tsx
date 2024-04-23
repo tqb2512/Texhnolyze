@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { product } from "@prisma/client";
+import Image from "next/image";
 
 export default function Header() {
     const cart = useSelector((state: RootState) => state.cart);
@@ -37,8 +38,8 @@ export default function Header() {
     return (
         <header className="flex justify-center h-20 bg-white border-b border-gray-200">
             <div className="flex justify-between items-center w-full max-w-[75%]">
-                <div className="flex items-center space-x-2">
-                    <Link href="/" className="w-32 h-full text-2xl font-bold">
+                <div className="flex items-center space-x-4 h-full">
+                    <Link href="/" className="w-32 h-full text-2xl font-bold flex items-center">
                         Texhnolyze
                     </Link>
                     <div className={`w-[20rem] h-10 bg-blue-light-bg rounded-full space-x-2 flex items-center group ${isSearchFocused ? 'border-2 border-blue-500' : 'border-2 border-blue-light-bg'}`}>
@@ -56,7 +57,7 @@ export default function Header() {
                 </div>
 
                 {searchResult.length > 0 && (
-                    <div className="w-[20rem] max-h-[26rem] overflow-y-auto shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white rounded-md absolute top-[4rem] ml-[8.5rem] z-50">
+                    <div className="w-[20rem] max-h-[26rem] overflow-y-auto shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white rounded-md absolute top-[4rem] ml-[9rem] z-50">
                         <div className="p-2 flex justify-between font-semibold">
                             <h1>Search Result</h1>
                         </div>
@@ -64,7 +65,10 @@ export default function Header() {
                         <div className="p-4 space-y-4 w-full">
                             {searchResult.map((product, index) => (
                                 <div key={index} className="flex space-x-4">
-                                    <div className="w-16 h-16 bg-red-200 rounded-md flex-shrink-0"></div>
+                                    <div className="w-16 h-16 bg-white rounded-md shrink-0 relative overflow-hidden">
+                                            <Image src={product.previewImage || "next.svg"} alt={"product image"} fill sizes="64px"
+                                                className="object-cover" />
+                                    </div>
                                     <div className="flex flex-col justify-between w-full">
                                         <Link href={`/product/${product.id}`} className="font-semibold">{product.name}</Link>
                                         <h1 className="text-red-500">{product.price.toLocaleString()}</h1>
@@ -99,7 +103,10 @@ export default function Header() {
                             <div className="p-4 space-y-4 w-full">
                                 {cart.map((cartItem, index) => (
                                     <div key={index} className="flex space-x-4">
-                                        <div className="w-16 h-16 bg-red-200 rounded-md"></div>
+                                        <div className="w-16 h-16 bg-white rounded-md relative overflow-hidden">
+                                            <Image src={cartItem.product.previewImage || "next.svg"} alt={"product image"} fill sizes="64px"
+                                                className="object-cover" />
+                                        </div>
                                         <div className="flex flex-col justify-between">
                                             <Link href={`/product/${cartItem.product.id}`} className="font-semibold">{cartItem.product.name}</Link>
                                             <h1 className="text-red-500">{cartItem.quantity} x {cartItem.product.price.toLocaleString()}</h1>

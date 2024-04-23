@@ -3,6 +3,7 @@ import {product} from "@prisma/client";
 import { useDispatch } from "react-redux";
 import * as cart from "@/libs/features/slices/cart";
 import Link from "next/link";
+import Image from "next/image";
 interface CartItemProps {
     product: product;
     quantity: number;
@@ -12,8 +13,9 @@ export default function CartItem({product, quantity}: CartItemProps) {
     const dispatch = useDispatch();
     return (
         <div className="bg-white rounded-md w-full flex justify-between p-4 space-x-4">
-            <div className="w-20 h-20 bg-red-200">
-
+            <div className="w-20 h-20 bg-white shrink-0 relative overflow-hidden">
+                <Image src={product.previewImage || "next.svg"} alt={"product image"} fill sizes="80px"
+                    className="object-cover" />
             </div>
             <div className="flex justify-between space-y-2 w-full">
                 <div  className="flex flex-col">

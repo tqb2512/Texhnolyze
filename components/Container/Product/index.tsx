@@ -86,7 +86,6 @@ export default function ProductContainer({ product_id }: CategoryContainerProps)
                 <div className="w-[35%] flex flex-col space-y-4 sticky top-24 h-max">
                     <div className="w-full bg-white rounded-md p-4">
                         <h1 className="font-semibold text-lg">{product?.name}</h1>
-                        <hr className="mt-2" />
                         <div className="w-full bg-white rounded-md">
                         </div>
                         <hr className="mt-2" />

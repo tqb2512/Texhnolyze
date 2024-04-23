@@ -13,7 +13,7 @@ export default async function middleware(req: NextRequest, event: NextFetchEvent
             return NextResponse.redirect(url.toString())
         }
     } else {
-        if (req.nextUrl.pathname === '/user') {
+        if (req.nextUrl.pathname === '/user' || req.nextUrl.pathname === '/checkout') {
             const url = req.nextUrl.clone()
             url.pathname = '/login'
             return NextResponse.redirect(url.toString())
@@ -24,5 +24,5 @@ export default async function middleware(req: NextRequest, event: NextFetchEvent
 }
 
 export const config = {
-    matcher: ['/login', '/register', '/user']
+    matcher: ['/login', '/register', '/user', '/checkout']
 }
